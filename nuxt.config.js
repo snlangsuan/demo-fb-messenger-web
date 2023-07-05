@@ -62,7 +62,6 @@ export default {
       apiKey: process.env.FIREBASE_APIKEY,
       authDomain: process.env.FIREBASE_AUTHDOMAIN,
       projectId: process.env.FIREBASE_PROJECTID,
-      databaseURL: 'https://' + process.env.FIREBASE_PROJECTID + '.firebaseio.com',
       storageBucket: process.env.FIREBASE_STORAGEBUCKET,
       messagingSenderId: process.env.FIREBASE_FIREBASE_MESSAGINGSENDERID,
       appId: process.env.FIREBASE_APPID,
