@@ -1,4 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
+const vconsole = { hid: 'vconsole', src: 'https://cdnjs.cloudflare.com/ajax/libs/vConsole/3.15.1/vconsole.min.js' }
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -27,6 +28,9 @@ export default {
       { name: 'format-detection', content: 'telephone=no' },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    script: [
+      vconsole
+    ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -65,12 +69,14 @@ export default {
       storageBucket: process.env.FIREBASE_STORAGEBUCKET,
       messagingSenderId: process.env.FIREBASE_FIREBASE_MESSAGINGSENDERID,
       appId: process.env.FIREBASE_APPID,
+      databaseURL: process.env.FIREBASE_DATABASEURL,
     },
     services: {
-      database: {
-        emulatorPort: 9000,
-        emulatorHost: 'localhost',
-      }
+      // database: {
+      //   emulatorPort: 9000,
+      //   emulatorHost: 'localhost',
+      // }
+      database: true
     }
   },
 

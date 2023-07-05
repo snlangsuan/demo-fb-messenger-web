@@ -9,7 +9,7 @@
         <div class="text-h5 mt-3">{{ code }}</div>
       </v-col>
       <v-col v-else class="text-center">
-        <v-progress-circular width="3" size="14" indeterminate />
+        <v-progress-circular width="3" size="32" indeterminate />
       </v-col>
     </v-row>
   </v-container>
@@ -26,6 +26,8 @@ export default {
     }
   },
   mounted() {
+    // eslint-disable-next-line no-undef
+    window.vConsole = new VConsole()
     if (this.$route.query.code) {
       this.validatePromoCode(this.$route.query.code)
     } else {
@@ -56,7 +58,7 @@ export default {
         this.loading = false
       }
     }
-  }
+  },
 }
 </script>
 
