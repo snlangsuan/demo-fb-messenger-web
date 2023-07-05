@@ -1,12 +1,15 @@
 <template>
   <v-container fill-height>
     <v-row class="fill-height align-center justify-center">
-      <v-col class="text-center">
+      <v-col v-if="!loading" class="text-center">
         <div :class="['qr-code__container', { 'qr-code--used': status === 'used' }]">
           <qr-code v-if="code" :text="code" :class="['mx-auto', 'qr-code__img']" :style="{ width: '100%', maxWidth: '256px' }"></qr-code>
           <div class="qr-code__text red--text">ใช้งานแล้ว</div>
         </div>
         <div class="text-h5 mt-3">{{ code }}</div>
+      </v-col>
+      <v-col v-else class="text-center">
+        <v-progress-circular width="3" size="14" indeterminate />
       </v-col>
     </v-row>
   </v-container>
@@ -17,6 +20,7 @@ export default {
   name: 'PromoCodePage',
   data() {
     return {
+      loading: true,
       code: null,
       status: 'used'
     }
@@ -31,12 +35,14 @@ export default {
   methods: {
     async validatePromoCode(code) {
       try {
+        this.loading = true
         const db = this.$fire.database
         const key = 'facebook/orders/' + code
         const ref = db.ref(key)
         const snapshot = await ref.once('value')
         // console.log(key, snapshot.val())
         const val = snapshot.val()
+        // console.log(val)
         if (val) {
           this.code = code
           this.status = val.status
@@ -46,6 +52,8 @@ export default {
       } catch (error) {
         console.log(error)
         this.$nuxt.error({ statusCode: 404 })
+      } finally {
+        this.loading = false
       }
     }
   }
