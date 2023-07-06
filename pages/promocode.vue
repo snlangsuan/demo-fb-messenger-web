@@ -46,7 +46,7 @@ export default {
         const val = snapshot.val()
         // console.log(val)
         if (val) {
-          this.code = code
+          this.code = val.order_code
           this.status = val.status
         } else {
           throw new Error('invalid code')
